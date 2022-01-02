@@ -1,6 +1,8 @@
 # WordleSolver
 A simple solver for wordle in python
 
+Wordle: https://www.powerlanguage.co.uk/wordle/
+
 Word source: https://github.com/dwyl/english-words
 
 ## Usage:
