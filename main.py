@@ -9,6 +9,7 @@ def print_help():
     print("*\t* for a position where the letter is unknown")
     print("*\t* There are additional modifiers to filter:")
     print("*\t\t* add a # at the end of the pattern followed by all letter not included")
+    print("*\t\t* add a + at the end of the excluded letters by all leters included")
     print("* Enter -rand x for x random full words")
     print("* Enter -help for this help text\n")
     print("* Enter -1 to exit this program\n\n")
@@ -27,10 +28,15 @@ def parse(guess):
         print_rand(guess[-1])
         return
     excluded = ""
+    included = ""
     if("#" in guess):
         split = guess.split('#')
         guess = split[0]
         excluded = split[1]
+        if "+" in split[1]:
+            split = split[1].split('+')
+            excluded = split[0]
+            included = split[1]
     if(len(guess) != 5):
         print("Length of guess incorrect:\nExpected 5, found {}".format(len(guess)))
         return
@@ -45,6 +51,10 @@ def parse(guess):
         for c in list(excluded):
             if c in word:
                 valid = False
+        if valid:
+            for c in list(included):
+                if c not in word:
+                    valid = False
         if valid:
             for pos, c in enumerate(word):
                 if chars[pos] != '*':
